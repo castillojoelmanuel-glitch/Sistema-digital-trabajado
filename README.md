@@ -23,9 +23,10 @@ Arquitectura cliente-servidor en tres capas: presentación, lógica de negocio y
 - HTML, CSS y JavaScript: interfaz web
 - API REST con intercambio de datos en JSON
 - Base de datos relacional
+- Python: implementación del módulo de control de existencias
 
 ## Estado actual
-Fases de análisis y diseño completadas. La documentación técnica y el control de versiones están al día (versión `v0.1.0`). La implementación de los módulos está pendiente.
+Fases de análisis y diseño completadas. La documentación técnica y el control de versiones están al día (versión `v0.2.0`). Se implementó el módulo de control de existencias aplicando el patrón Observer (`src/inventario/`); la implementación de los demás módulos está pendiente.
 
 ## Organización frontend y backend
 
@@ -35,10 +36,40 @@ Fases de análisis y diseño completadas. La documentación técnica y el contro
 
 **Comunicación.** El frontend se comunica con el backend mediante una API REST sobre HTTP, con datos en formato JSON. Al registrar una venta, el frontend envía una petición `POST /ventas`; el backend valida los datos, descuenta las existencias, guarda la transacción y devuelve la confirmación o el error correspondiente.
 
+## Patrón de diseño aplicado (v0.2.0)
+
+En Ingeniería de Software II se intervino el control de existencias aplicando el patrón **Observer**. La clase `Producto` notifica a sus observadores cada vez que cambia su stock, lo que evita repetir la lógica de la alerta en los flujos de venta y de compra (RF02, RF03, RF04 y RF06).
+
+### Estructura del código
+
+```
+src/inventario/
+├── observador.py      # Interfaz ObservadorStock
+├── producto.py        # Producto (notificador)
+├── observadores.py    # AlertaStockMinimo y RegistroMovimientos
+└── demo.py            # Script de verificación
+```
+
+### Ejecución
+
+```
+python3 src/inventario/demo.py
+```
+
+Salida esperada:
+
+```
+Movimiento: Venta | Arroz 5 lb | stock actual: 8
+ALERTA: Arroz 5 lb está en stock mínimo (4 unidades)
+Movimiento: Venta | Arroz 5 lb | stock actual: 4
+Movimiento: Compra | Arroz 5 lb | stock actual: 24
+```
+
 ## Documentación
 - [Requisitos](requisitos.md)
-- [Modelos UML](modelos-uml.md)
+- [Modelos UML](modelos-uml.md) (incluye los diagramas v0.2.0 del patrón Observer)
 - [Arquitectura](arquitectura.md)
 - [Gestión del avance y riesgos](gestion-avance.md)
 - [Registro de cambios](CHANGELOG.md)
-- [Nota técnica de versión](nota-version-v0.1.0.md)
+- [Nota técnica de versión v0.1.0](nota-version-v0.1.0.md)
+- [Nota técnica de versión v0.2.0](nota-version-v0.2.0.md)
