@@ -75,3 +75,48 @@ sequenceDiagram
     API-->>Frontend: Confirmación y comprobante
     Frontend-->>Cajero: Muestra comprobante
 ```
+## Diagrama de clases v0.2.0: patrón Observer en el control de stock
+
+```mermaid
+classDiagram
+    class Producto {
+        +int id
+        +String nombre
+        +double precio
+        +int stock
+        +int stockMinimo
+        +actualizarStock(cantidad, motivo)
+        +agregarObservador(observador)
+        +quitarObservador(observador)
+    }
+    class ObservadorStock {
+        <<interface>>
+        +actualizar(producto, motivo)
+    }
+    class AlertaStockMinimo {
+        +actualizar(producto, motivo)
+    }
+    class RegistroMovimientos {
+        -historial
+        +actualizar(producto, motivo)
+    }
+    Producto "1" --> "*" ObservadorStock : notifica
+    ObservadorStock <|.. AlertaStockMinimo
+    ObservadorStock <|.. RegistroMovimientos
+```
+
+## Diagrama de secuencia v0.2.0: notificación al registrar una venta
+
+```mermaid
+sequenceDiagram
+    actor Cajero
+    participant API as Backend (API)
+    participant P as Producto
+    participant A as AlertaStockMinimo
+    participant R as RegistroMovimientos
+    Cajero->>API: Confirma la venta
+    API->>P: actualizarStock(-cantidad, "Venta")
+    P->>A: actualizar(producto, motivo)
+    P->>R: actualizar(producto, motivo)
+    A-->>Cajero: Alerta si stock <= stockMinimo
+```
