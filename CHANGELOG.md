@@ -7,3 +7,6 @@
 | 3 | Octubre de 2026 | Elaboración de modelos UML (casos de uso, clases y secuencia) | Avance |
 | 4 | Octubre de 2026 | Definición de la arquitectura y separación frontend/backend | Avance |
 | 5 | Octubre de 2026 | Creación del tablero de GitHub Projects y registro de riesgos | Avance |
+| 6 | Noviembre de 2026 | Aplicación del patrón Observer en el control de existencias (interfaz `ObservadorStock` y observadores `AlertaStockMinimo` y `RegistroMovimientos`) | Avance |
+| 7 | Noviembre de 2026 | Modificación de `Producto.actualizarStock()` para notificar a los observadores cada vez que cambia el stock | Ajuste |
+| 8 | Noviembre de 2026 | Publicación de la nota de versión v0.2.0 y adición de `.gitignore` para excluir `__pycache__/` | Avance |
