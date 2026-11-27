@@ -10,3 +10,6 @@
 | 6 | Noviembre de 2026 | Aplicación del patrón Observer en el control de existencias (interfaz `ObservadorStock` y observadores `AlertaStockMinimo` y `RegistroMovimientos`) | Avance |
 | 7 | Noviembre de 2026 | Modificación de `Producto.actualizarStock()` para notificar a los observadores cada vez que cambia el stock | Ajuste |
 | 8 | Noviembre de 2026 | Publicación de la nota de versión v0.2.0 y adición de `.gitignore` para excluir `__pycache__/` | Avance |
+| 9 | Noviembre de 2026 | Diseño y ejecución de 27 pruebas con pytest 9.2.0 (carpeta `tests/` y archivo `pytest.ini`) sobre el componente de control de existencias | Avance |
+| 10 | Noviembre de 2026 | Corrección de cinco no conformidades en `Producto`: validación de cantidades y de stock inicial y mínimo, observadores repetidos y observadores que fallan | Ajuste |
+| 11 | Noviembre de 2026 | Validación final: 27 pruebas aprobadas y demo sin cambios en su resultado | Avance |
